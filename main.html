@@ -18,10 +18,8 @@ overwolf.windows.obtainDeclaredWindow("index",
          }
      }
  );
-
-/*
-overwolf.games.launchers.getRunningLaunchersInfo.onTerminated.addListener(
-
+ /*
+ overwolf.games.launchers.getRunningLaunchersInfo.onLaunched.addListener(
 overwolf.windows.obtainDeclaredWindow("index",
     function(result){
         if (result.status == "success"){
@@ -30,32 +28,47 @@ overwolf.windows.obtainDeclaredWindow("index",
              );
          }
      }
- );
-
+ )
     );
 	*/
 
+overwolf.games.launchers.getRunningLaunchersInfo.onTerminated.addListener(
+overwolf.windows.obtainDeclaredWindow("index",
+    function(result){
+        if (result.status == "success"){
+            overwolf.windows.restore(result.window.id,
+                function(result){}
+             );
+         }
+     }
+ )
+    );
+	
+	
 
 
-function Show_Hide (
+function Show_Hide () {
 overwolf.settings.registerHotKey(
-    "Show_Hide",
-    function(arg) {
-		isWindowVisibleToUser(isVisible);
-        if (arg.status == "success") {
-        	if (isVisible.visible == "fully" || isVisible.visible == "partial")
-			{
-		    hide(index, hidden);
-			}
-			if (isVisible.visible == "hidden")
-			{
-			restore(index, restored);
-			}
-		}
+    "Show_Hide",  function(arg) {
+      isWindowVisibleToUser(function(isVisible) {
+   				if (arg.status === "success") {
+        				if (isVisible.visible === "fully" || isVisible.visible === "partial")
+							{
+		   						 hide(index, hidden);
+							}
+						if (isVisible.visible === "hidden")
+							{
+								restore(index, restored);
+              }
+          }
+      }
+   );
     }
-);
+  );
+  
+}
 
-
+Show_Hide();
 </script>
 <meta charset="utf-8">
 <title>Main</title>
