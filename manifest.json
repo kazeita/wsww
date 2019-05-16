@@ -74,7 +74,8 @@
 				"file": "index.html",
 				"size": {
 					"width": 1900,
-					"height": 1000
+					"height": 1000,
+					"min_size": 1900
 				},
 				"start_position": {
 					"top": 0,
