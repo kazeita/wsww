@@ -1,0 +1,93 @@
+{
+	"manifest_version": "1",
+	"type": "WebApp",
+	"meta": {
+		"name": "Which side will win?",
+		"version": "0.0.0",
+		"minimum-overwolf-version": "0.109.0.0",
+		"author": "Ngo Quang Minh",
+		"icon": "icon.png",
+		"icon_gray": "icon_gray.png",
+		"description": "Guess the outcome of a teamfight in League of Legends"
+	},
+	"permissions": [
+		"Hotkeys"
+	],
+	"data": {
+		
+		"hotkeys" : {
+        "Show_Hide_app": {
+            "title": "Show_Hide",
+            "action-type": "custom",
+            "default": "Ctrl+W"
+        }
+    },
+		"externally_connectable": {
+			"matches": [
+				"http://*.whichsidewillwin.com",
+				"https://*.google-analytics.com",
+				"http://*.google-analytics.com",
+				"https://www.googleapis.com"
+			]
+		},
+		"game_targeting": {
+			"type": "dedicated",
+			"game_ids": [
+				5426
+			]
+		},
+		"game_events": [5426],
+
+		"launch_events": [{
+			"event": "GameLaunch",
+			"event_data": {
+				"game_ids": [5426],
+				"wait_for_stable_framerate": 20
+			},
+			"start_minimized": false
+		}],
+
+		"start_window": "main",
+
+
+		"windows": {
+			"main": {
+				"file": "main.html",
+				"size": {
+					"width": 1900,
+					"height": 1000
+				},
+				"start_position": {
+					"top": 0,
+					"left": 0
+				},
+				"transparent": true,
+				"clickthrough": false,
+				"show_in_taskbar": true,
+				"grab_keyboard_focus": false,
+				"grab_focus_on_desktop": false,
+				"background_optimization": true,
+				"is_background_page": true
+			},
+
+			"index": {
+				"file": "index.html",
+				"size": {
+					"width": 1900,
+					"height": 1000
+				},
+				"start_position": {
+					"top": 0,
+					"left": 0
+				},
+				"transparent": false,
+				"clickthrough": false,
+				"show_in_taskbar": true,
+				"grab_keyboard_focus": false,
+				"grab_focus_on_desktop": false,
+				"background_optimization": true
+			}
+
+		}
+	}
+}
