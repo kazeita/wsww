@@ -4,40 +4,7 @@
   <script src="main.js"></script>
 <script>
 
-/* overwolf.streaming.onStopStreaming.addListener(
-    function (value) {
-        alert("a stream with id " + value.stream_id + " had stopped");
-    }
-);
-*/
-
-/*
-overwolf.windows.obtainDeclaredWindow("index",
-    function(result){
-        if (result.status == "success"){
-            overwolf.windows.restore(result.window.id,
-                function(result){}
-             );
-         }
-     }
- );
- */
- 
-/*
- overwolf.games.launchers.getRunningLaunchersInfo.onLaunched.addListener(
-overwolf.windows.obtainDeclaredWindow("index",
-    function(result){
-        if (result.status == "success"){
-            overwolf.windows.restore(result.window.id,
-                function(result){}
-             );
-         }
-     }
- )
-    );
-	*/
-	
-	function launchApp() {
+ 	function launchApp() {
 	overwolf.windows.obtainDeclaredWindow("index",
     function(result){
         if (result.status == "success"){
@@ -52,7 +19,7 @@ overwolf.windows.obtainDeclaredWindow("index",
 	
 	
 	
-/*
+/* Launch the app when the launcher terminates. Didn't work in-game
 overwolf.games.launchers.onTerminated.addListener(
 function (res) {
   console.log("onTerminated fired"); 
@@ -68,51 +35,9 @@ function (res) {
 });
 */
 
-/*
-overwolf.games.events.onInfoUpdates2.matchStart.addListener(
-function(data) {
-  console.log("matchStart fired"); 
-  launchApp();
-      }
-);
-
-var g_interestedInFeatures = [
-  'summoner_info',
-  'gameMode',
-  'teams',
-  'matchState',
-  'kill',
-  'death',
-  'respawn',
-  'assist',
-  'minions',
-  'level',
-  'abilities',
-  'announcer'
-];
-
-function setFeatures() {
-  overwolf.games.events.setRequiredFeatures(g_interestedInFeatures, function(info) {
-    if (info.status == "error")
-    {
-      //console.log("Could not set required features: " + info.reason);
-      //console.log("Trying in 2 seconds");
-      window.setTimeout(setFeatures, 2000);
-      return;
-    }
-
-    console.log("Set required features:");
-    console.log(JSON.stringify(info));
-	 overwolf.games.events.onNewEvents.addListener(function(info) {
-    console.log("EVENT FIRED: " + JSON.stringify(info));
-  });
-
-  });
-}
-*/
 
 
-/*
+/* Show/Hide app hotkey, didn't work
  function Show_Hide () {
 overwolf.settings.registerHotKey(
     "Show_Hide",  function(arg) {
@@ -137,7 +62,7 @@ overwolf.settings.registerHotKey(
 }
 */
 
-
+// Show_Hide window simple version. Didn't work
 function Show_Hide () {
 	overwolf.settings.registerHotKey(
     "Show_Hide",  function(arg) {
@@ -154,17 +79,17 @@ function Show_Hide () {
 {
     registerEvents();
     setTimeout(setFeatures, 1000);
-	if (res.gameInfo.isRunning) {
+	if (res.gameInfo.isRunning) { //tried matchStart, didn't work. Switched to isRunning
  	console.log("isRunning fired");
  	launchApp();
 }
 	
   }
   console.log("onGameInfoUpdated: " + JSON.stringify(res));
- // launchApp();
+ // launchApp(); //this worked by calling the app whenever game info was updated. But it shows up too many times and when the game ends, it covers up the launcher.
 });
 
-/*
+/* Tried matchStart. didn't work. Switched to isRunning
 overwolf.games.events.onInfoUpdates2.addListener(function(data) {
 	console.log("Listener running");
  if (data.info.game_info.matchStarted) {
