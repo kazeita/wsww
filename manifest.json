@@ -19,7 +19,7 @@
         "Show_Hide": {
             "title": "Show/Hide App",
             "action-type": "custom",
-            "default": "Ctrl+W"
+            "default": "Ctrl+Alt+P"
         }
     },
 		"externally_connectable": {
