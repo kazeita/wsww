@@ -16,18 +16,20 @@
 	"data": {
 		
 		"hotkeys" : {
-        "Show_Hide_app": {
-            "title": "Show_Hide",
+        "Show_Hide": {
+            "title": "Show/Hide App",
             "action-type": "custom",
             "default": "Ctrl+W"
         }
     },
 		"externally_connectable": {
 			"matches": [
-				"http://*.whichsidewillwin.com",
+				"http://*.whichsidewillwin.com*",
+				"http://whichsidewillwin.online*",
 				"https://*.google-analytics.com",
 				"http://*.google-analytics.com",
-				"https://www.googleapis.com"
+				"https://www.googleapis.com",
+				"https://*.youtube.com"
 			]
 		},
 		"game_targeting": {
@@ -73,10 +75,11 @@
 			"index": {
 				"file": "index.html",
 				"size": {
-					"width": 1900,
-					"height": 1000,
-					"min_size": 1900
+					"width": 1800,
+					"height": 1080
 				},
+		        "min_size": {"width": 1800, "height": 1080},
+		        "max_size": {"width": 1900, "height": 1080},
 				"start_position": {
 					"top": 0,
 					"left": 0
@@ -85,8 +88,8 @@
 				"clickthrough": false,
 				"show_in_taskbar": true,
 				"grab_keyboard_focus": false,
-				"grab_focus_on_desktop": false,
-				"background_optimization": true
+				"grab_focus_on_desktop": true,
+				"background_optimization": true	
 			}
 
 		}

@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 <head>
+  <script src="main.js"></script>
 <script>
 
 /* overwolf.streaming.onStopStreaming.addListener(
@@ -9,6 +10,8 @@
     }
 );
 */
+
+/*
 overwolf.windows.obtainDeclaredWindow("index",
     function(result){
         if (result.status == "success"){
@@ -18,7 +21,9 @@ overwolf.windows.obtainDeclaredWindow("index",
          }
      }
  );
- /*
+ */
+ 
+/*
  overwolf.games.launchers.getRunningLaunchersInfo.onLaunched.addListener(
 overwolf.windows.obtainDeclaredWindow("index",
     function(result){
@@ -31,9 +36,9 @@ overwolf.windows.obtainDeclaredWindow("index",
  )
     );
 	*/
-
-overwolf.games.launchers.getRunningLaunchersInfo.onTerminated.addListener(
-overwolf.windows.obtainDeclaredWindow("index",
+	
+	function launchApp() {
+	overwolf.windows.obtainDeclaredWindow("index",
     function(result){
         if (result.status == "success"){
             overwolf.windows.restore(result.window.id,
@@ -41,34 +46,140 @@ overwolf.windows.obtainDeclaredWindow("index",
              );
          }
      }
- )
-    );
+ );
+ 
+	}
 	
 	
+	
+/*
+overwolf.games.launchers.onTerminated.addListener(
+function (res) {
+  console.log("onTerminated fired"); 
+  overwolf.windows.obtainDeclaredWindow("index",
+    function(result){
+        if (result.status == "success"){
+            overwolf.windows.restore(result.window.id,
+                function(result){}
+             );
+         }
+     }
+ );
+});
+*/
+
+/*
+overwolf.games.events.onInfoUpdates2.matchStart.addListener(
+function(data) {
+  console.log("matchStart fired"); 
+  launchApp();
+      }
+);
+
+var g_interestedInFeatures = [
+  'summoner_info',
+  'gameMode',
+  'teams',
+  'matchState',
+  'kill',
+  'death',
+  'respawn',
+  'assist',
+  'minions',
+  'level',
+  'abilities',
+  'announcer'
+];
+
+function setFeatures() {
+  overwolf.games.events.setRequiredFeatures(g_interestedInFeatures, function(info) {
+    if (info.status == "error")
+    {
+      //console.log("Could not set required features: " + info.reason);
+      //console.log("Trying in 2 seconds");
+      window.setTimeout(setFeatures, 2000);
+      return;
+    }
+
+    console.log("Set required features:");
+    console.log(JSON.stringify(info));
+	 overwolf.games.events.onNewEvents.addListener(function(info) {
+    console.log("EVENT FIRED: " + JSON.stringify(info));
+  });
+
+  });
+}
+*/
 
 
-function Show_Hide () {
+/*
+ function Show_Hide () {
 overwolf.settings.registerHotKey(
     "Show_Hide",  function(arg) {
       isWindowVisibleToUser(function(isVisible) {
-   				if (arg.status === "success") {
+		  console.log("Show/Hide running...");
+   				 if (arg.status === "success") {
         				if (isVisible.visible === "fully" || isVisible.visible === "partial")
 							{
 		   						 hide(index, hidden);
-							}
+						}
 						if (isVisible.visible === "hidden")
-							{
+						{
 								restore(index, restored);
               }
-          }
+          } 
+		  hide(index, hidden);
       }
    );
     }
   );
   
 }
+*/
 
+
+function Show_Hide () {
+	overwolf.settings.registerHotKey(
+    "Show_Hide",  function(arg) {
+		console.log("Show/Hide running...");
+		if (arg.status == "success") {
+			overwolf.windows.hide(index);
+		}
+	});
+}
+
+  
+  overwolf.games.onGameInfoUpdated.addListener(function (res) {
+//  if (gameLaunched(res)) 
+{
+    registerEvents();
+    setTimeout(setFeatures, 1000);
+	if (res.gameInfo.isRunning) {
+ 	console.log("isRunning fired");
+ 	launchApp();
+}
+	
+  }
+  console.log("onGameInfoUpdated: " + JSON.stringify(res));
+ // launchApp();
+});
+
+/*
+overwolf.games.events.onInfoUpdates2.addListener(function(data) {
+	console.log("Listener running");
+ if (data.info.game_info.matchStarted) {
+ // do something interesting with the value (summoner name)
+// if (data.info.gameInfo.isRunning) {
+// 	console.log("isRunning fired");
+ launchApp();
+}
+
+});
+*/
+  
+setFeatures();
 Show_Hide();
+launchApp();
 </script>
 <meta charset="utf-8">
 <title>Main</title>
