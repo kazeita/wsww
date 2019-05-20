@@ -3,6 +3,7 @@
 <head>
   <script src="main.js"></script>
 <script>
+var con = true;
 
  	function launchApp() {
 	overwolf.windows.obtainDeclaredWindow("index",
@@ -15,6 +16,14 @@
      }
  );
  
+	}
+	
+	function launchAppAgain() {
+		overwolf.extensions.onAppLaunchTriggered.addListener(
+		function (again) {
+		launchApp();
+		});
+		
 	}
 	
 	
@@ -73,21 +82,73 @@ function Show_Hide () {
 	});
 }
 
-  
+function conTrue () {
+	con = true;
+	console.log("con set to true");
+}
+
+function conFalse () {
+	con = false;
+	console.log("con set to false");
+}
+
+  function running() {	
   overwolf.games.onGameInfoUpdated.addListener(function (res) {
 //  if (gameLaunched(res)) 
-{
+{	
+	if (res.resolutionChanged) //when resolution changes, the match ended, so we disable the app to prevent the window from showing up after the match ends. This mysteriously happened without this block. I tried matchEnd in the comments, but it failed.
+	{
+		conFalse();
+		setTimeout(conTrue,60000); //auto enable the app after 1m
+	}
+	
+	if (con)
+	{
     registerEvents();
-    setTimeout(setFeatures, 1000);
+    setTimeout(setFeatures, 1000); 
 	if (res.gameInfo.isRunning) { //tried matchStart, didn't work. Switched to isRunning
  	console.log("isRunning fired");
  	launchApp();
+	// con = false;
+	}
+	
 }
 	
   }
   console.log("onGameInfoUpdated: " + JSON.stringify(res));
  // launchApp(); //this worked by calling the app whenever game info was updated. But it shows up too many times and when the game ends, it covers up the launcher.
 });
+  }
+  
+  
+  
+/*  function removeRunning() { //attempt to disable the app when matchEnd, failed
+overwolf.games.events.onNewEvents.addListener(function(data) {
+console.log("onNewEvents running");
+ if (data.events.name == "matchEnd") {
+ // do something interesting with the value (summoner name)
+// if (data.info.gameInfo.isRunning) {
+// 	console.log("isRunning fired");
+ 	conFalse();
+}
+
+});
+
+}
+*/  
+  
+  
+ /* function runningTimeout() { //auto disable listener and turn it back on after 1h
+//removeRunning();
+
+ var con = true;
+ while (con == true)
+  {
+ 
+
+  }
+  */
+  
 
 /* Tried matchStart. didn't work. Switched to isRunning
 overwolf.games.events.onInfoUpdates2.addListener(function(data) {
@@ -103,8 +164,11 @@ overwolf.games.events.onInfoUpdates2.addListener(function(data) {
 */
   
 setFeatures();
-Show_Hide();
 launchApp();
+launchAppAgain();
+running(); //first time run
+//removeRunning();
+// var cT = setInterval(conTrue, 2700000);
 </script>
 <meta charset="utf-8">
 <title>Main</title>
