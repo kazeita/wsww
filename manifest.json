@@ -56,7 +56,7 @@
 			"main": {
 				"file": "main.html",
 				"size": {
-					"width": 1400,
+					"width": 1300,
 					"height": 950
 				},
 				"start_position": {
@@ -75,11 +75,11 @@
 			"index": {
 				"file": "index.html",
 				"size": {
-					"width": 1400,
+					"width": 1300,
 					"height": 1050
 				},
 				"min_size": {
-					"width": 1400,
+					"width": 1300,
 					"height": 1050
 				},
 				"start_position": {
