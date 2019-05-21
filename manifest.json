@@ -3,7 +3,7 @@
 	"type": "WebApp",
 	"meta": {
 		"name": "Which side will win?",
-		"version": "0.0.0",
+		"version": "0.0.7",
 		"minimum-overwolf-version": "0.109.0.0",
 		"author": "Ngo Quang Minh",
 		"icon": "icon.png",
@@ -56,8 +56,8 @@
 			"main": {
 				"file": "main.html",
 				"size": {
-					"width": 1900,
-					"height": 1000
+					"width": 1400,
+					"height": 950
 				},
 				"start_position": {
 					"top": 0,
@@ -75,11 +75,13 @@
 			"index": {
 				"file": "index.html",
 				"size": {
-					"width": 1800,
-					"height": 1080
+					"width": 1400,
+					"height": 1050
 				},
-		        "min_size": {"width": 1800, "height": 1080},
-		        "max_size": {"width": 1900, "height": 1080},
+				"min_size": {
+					"width": 1400,
+					"height": 1050
+				},
 				"start_position": {
 					"top": 0,
 					"left": 0
