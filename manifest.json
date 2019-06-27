@@ -56,8 +56,8 @@
 			"main": {
 				"file": "main.html",
 				"size": {
-					"width": 1300,
-					"height": 950
+					"width": 1100,
+					"height": 900
 				},
 				"start_position": {
 					"top": 0,
@@ -75,17 +75,22 @@
 			"index": {
 				"file": "index.html",
 				"size": {
-					"width": 1300,
-					"height": 1050
+					"width": 1250,
+					"height": 850
 				},
 				"min_size": {
-					"width": 1300,
-					"height": 1050
+					"width": 1250,
+					"height": 850
+				},
+				"max_size": {
+					"width": 1250,
+					"height": 850
 				},
 				"start_position": {
-					"top": 0,
+					"top": -100,
 					"left": 0
 				},
+				"resizable":true,
 				"transparent": false,
 				"clickthrough": false,
 				"show_in_taskbar": true,
